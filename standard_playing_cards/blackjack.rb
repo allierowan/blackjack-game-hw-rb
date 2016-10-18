@@ -37,9 +37,19 @@ module StandardPlayingCards
     end
 
     def player_score
+      score = 0
+      player_hand.each do |card|
+        score += card_points(card)
+      end
+      return score
     end
 
     def dealer_score
+      score = 0
+      dealer_hand.each do |card|
+        score += card_points(card)
+      end
+      return score
     end
 
   end
