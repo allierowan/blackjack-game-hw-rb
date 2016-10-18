@@ -31,4 +31,14 @@ class DeckTest <Minitest::Test
     end
     assert_equal Set["Diamonds", "Hearts", "Clubs", "Spades"], suit_set
   end
+
+  def test_e_deal_card
+    assert_equal true, deck.deal_card!.is_a?(Card), "deal doesn't return a card"
+  end
+
+  def test_f_dealt_card_gone
+    test_deck = Deck.new
+    dealt_card = test_deck.deal_card!
+    assert_equal false, test_deck.deck_cards.include?(dealt_card)
+  end
 end

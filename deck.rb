@@ -15,5 +15,12 @@ class Deck
     end
   end
 
+  def shuffle_deck
+    deck_cards.shuffle!
+  end
+
+  def deal_card!
+    deck_cards.shift
+  end
 
 end
