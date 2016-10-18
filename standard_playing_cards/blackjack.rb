@@ -19,5 +19,12 @@ module StandardPlayingCards
       end
     end
 
+    def hit_player!
+      player_hand << game_deck.deal_card!
+    end
+
+    def hit_dealer!
+      dealer_hand << game_deck.deal_card!
+    end
   end
 end

@@ -2,7 +2,7 @@ module StandardPlayingCards
   class Deck
 
     attr_accessor :deck_cards
- 
+
     def initialize(input_cards = [])
       if input_cards.length > 0
         @deck_cards = input_cards
@@ -30,5 +30,8 @@ module StandardPlayingCards
       deck_cards == []
     end
 
+    def num_cards_left
+      deck_cards.length
+    end
   end
 end

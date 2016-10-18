@@ -36,4 +36,25 @@ class BlackjackTest < Minitest::Test
     assert new_blackjack.dealer_hand[0].is_a?(StandardPlayingCards::Card)
   end
 
+  def test_hit_player
+    new_blackjack = StandardPlayingCards::Blackjack.new
+    new_blackjack.deal_game!
+    new_blackjack.hit_player!
+    assert_equal 3, new_blackjack.player_hand.length
+  end
+
+  def test_hit_dealer
+    new_blackjack = StandardPlayingCards::Blackjack.new
+    new_blackjack.deal_game!
+    new_blackjack.hit_dealer!
+    assert_equal 3, new_blackjack.dealer_hand.length
+  end
+
+  def test_hit_player_updates_deck
+    new_blackjack = StandardPlayingCards::Blackjack.new
+    new_blackjack.deal_game!
+    new_blackjack.hit_player!
+    assert_equal 47, new_blackjack.game_deck.num_cards_left
+  end
+
 end
