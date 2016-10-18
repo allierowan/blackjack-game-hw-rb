@@ -50,4 +50,18 @@ class DeckTest <Minitest::Test
     new_card_at_index = test_deck.deck_cards[index]
     refute_equal card_at_index, new_card_at_index
   end
+
+  def test_h_input_deck
+    one_diamonds = Card.new(1, "Diamonds")
+    two_spades = Card.new(2, "Spades")
+    test_deck = Deck.new([one_diamonds, two_spades])
+    assert_equal test_deck.deck_cards[0], one_diamonds
+  end
+
+  def test_i_empty_deck
+    one_diamonds = Card.new(1, "Diamonds")
+    new_deck = Deck.new([one_diamonds])
+    new_deck.deal_card!
+    assert new_deck.empty?
+  end
 end
