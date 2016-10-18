@@ -57,4 +57,26 @@ class BlackjackTest < Minitest::Test
     assert_equal 47, new_blackjack.game_deck.num_cards_left
   end
 
+  def test_hit_dealer_updates_deck
+    new_blackjack = StandardPlayingCards::Blackjack.new
+    new_blackjack.deal_game!
+    new_blackjack.hit_dealer!
+    assert_equal 47, new_blackjack.game_deck.num_cards_left
+  end
+
+  def test_card_points
+    two_diamond = StandardPlayingCards::Card.new(2, "Diamonds")
+    assert_equal 2, blackjack.card_points(two_diamond)
+  end
+
+  def test_card_points_ace
+    two_diamond = StandardPlayingCards::Card.new("A", "Diamonds")
+    assert_equal 11, blackjack.card_points(two_diamond)
+  end
+
+  def test_card_points_king
+    two_diamond = StandardPlayingCards::Card.new("K", "Diamonds")
+    assert_equal 10, blackjack.card_points(two_diamond)
+  end
+
 end
