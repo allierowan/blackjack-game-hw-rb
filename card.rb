@@ -7,4 +7,8 @@ class Card
     @suit = suit
   end
 
+  def ==(other_card)
+    face_value == other_card.face_value && suit == other_card.suit
+  end
+
 end
