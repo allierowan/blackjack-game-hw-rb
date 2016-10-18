@@ -2,6 +2,7 @@ require 'minitest/autorun'
 require 'minitest/pride'
 require_relative './deck'
 require 'set'
+require_relative './deck_empty_error'
 
 class DeckTest <Minitest::Test
   def deck
@@ -63,5 +64,23 @@ class DeckTest <Minitest::Test
     new_deck = Deck.new([one_diamonds])
     new_deck.deal_card!
     assert new_deck.empty?
+  end
+
+  def test_j_empty_deck_error
+    one_diamonds = Card.new(1, "Diamonds")
+    new_deck = Deck.new([one_diamonds])
+    new_deck.deal_card!
+    assert_raises(DeckEmptyError) do
+      new_deck.deal_card!
+    end
+  end
+
+  def test_k_empty_deck_error_shuffle
+    one_diamonds = Card.new(1, "Diamonds")
+    new_deck = Deck.new([one_diamonds])
+    new_deck.deal_card!
+    assert_raises(DeckEmptyError) do
+      new_deck.shuffle_deck!
+    end
   end
 end
