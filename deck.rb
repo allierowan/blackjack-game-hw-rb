@@ -15,7 +15,7 @@ class Deck
     end
   end
 
-  def shuffle_deck
+  def shuffle_deck!
     deck_cards.shuffle!
   end
 

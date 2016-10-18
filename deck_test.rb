@@ -33,12 +33,21 @@ class DeckTest <Minitest::Test
   end
 
   def test_e_deal_card
-    assert_equal true, deck.deal_card!.is_a?(Card), "deal doesn't return a card"
+    assert_equal deck.deck_cards[0], deck.deal_card!
   end
 
   def test_f_dealt_card_gone
     test_deck = Deck.new
     dealt_card = test_deck.deal_card!
     assert_equal false, test_deck.deck_cards.include?(dealt_card)
+  end
+
+  def test_g_shuffled_cards
+    test_deck = Deck.new
+    index = rand(52)
+    card_at_index = test_deck.deck_cards[index]
+    test_deck.shuffle_deck!
+    new_card_at_index = test_deck.deck_cards[index]
+    refute_equal card_at_index, new_card_at_index
   end
 end
