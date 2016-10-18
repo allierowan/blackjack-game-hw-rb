@@ -1,16 +1,16 @@
 require 'minitest/autorun'
 require 'minitest/pride'
-require_relative './deck'
+require_relative '../standard_playing_cards'
 require 'set'
-require_relative './deck_empty_error'
+
 
 class DeckTest <Minitest::Test
   def deck
-    ::Deck.new
+    StandardPlayingCards::Deck.new
   end
 
   def test_a_deck_cards
-    assert deck.deck_cards[0].is_a?(Card)
+    assert deck.deck_cards[0].is_a?(StandardPlayingCards::Card)
   end
 
   def test_b_52_cards
@@ -38,13 +38,13 @@ class DeckTest <Minitest::Test
   end
 
   def test_f_dealt_card_gone
-    test_deck = Deck.new
+    test_deck = StandardPlayingCards::Deck.new
     dealt_card = test_deck.deal_card!
     assert_equal false, test_deck.deck_cards.include?(dealt_card)
   end
 
   def test_g_shuffled_cards
-    test_deck = Deck.new
+    test_deck = StandardPlayingCards::Deck.new
     index = rand(52)
     card_at_index = test_deck.deck_cards[index]
     test_deck.shuffle_deck!
@@ -53,22 +53,22 @@ class DeckTest <Minitest::Test
   end
 
   def test_h_input_deck
-    one_diamonds = Card.new(1, "Diamonds")
-    two_spades = Card.new(2, "Spades")
-    test_deck = Deck.new([one_diamonds, two_spades])
+    one_diamonds = StandardPlayingCards::Card.new("A", "Diamonds")
+    two_spades = StandardPlayingCards::Card.new(2, "Spades")
+    test_deck = StandardPlayingCards::Deck.new([one_diamonds, two_spades])
     assert_equal test_deck.deck_cards[0], one_diamonds
   end
 
   def test_i_empty_deck
-    one_diamonds = Card.new(1, "Diamonds")
-    new_deck = Deck.new([one_diamonds])
+    one_diamonds = StandardPlayingCards::Card.new("A", "Diamonds")
+    new_deck = StandardPlayingCards::Deck.new([one_diamonds])
     new_deck.deal_card!
     assert new_deck.empty?
   end
 
   def test_j_empty_deck_error
-    one_diamonds = Card.new(1, "Diamonds")
-    new_deck = Deck.new([one_diamonds])
+    one_diamonds = StandardPlayingCards::Card.new("A", "Diamonds")
+    new_deck = StandardPlayingCards::Deck.new([one_diamonds])
     new_deck.deal_card!
     assert_raises(DeckEmptyError) do
       new_deck.deal_card!
@@ -76,8 +76,8 @@ class DeckTest <Minitest::Test
   end
 
   def test_k_empty_deck_error_shuffle
-    one_diamonds = Card.new(1, "Diamonds")
-    new_deck = Deck.new([one_diamonds])
+    one_diamonds = StandardPlayingCards::Card.new("A", "Diamonds")
+    new_deck = StandardPlayingCards::Deck.new([one_diamonds])
     new_deck.deal_card!
     assert_raises(DeckEmptyError) do
       new_deck.shuffle_deck!
