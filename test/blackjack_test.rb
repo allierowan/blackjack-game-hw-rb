@@ -79,9 +79,10 @@ class BlackjackTest < Minitest::Test
     assert_equal 10, blackjack.card_points(two_diamond)
   end
 
-  def test_player_hand_score
-    blackjack_game = StandardPlayingCards::Blackjack.new
-    blackjack_game.deal_game!
-    p blackjack_game.player_score
+  def test_hand_score
+    blkjk = StandardPlayingCards::Blackjack.new
+    blkjk.deal_game!
+    calc_score = blkjk.card_points(blkjk.player_hand[0])+blkjk.card_points(blkjk.player_hand[1])
+    assert_equal calc_score, blkjk.hand_score(blkjk.player_hand)
   end
 end
