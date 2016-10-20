@@ -19,5 +19,9 @@ module StandardPlayingCards
       hand_score == 21
     end
 
+    def bust_hand?
+      hand_score > 21
+    end
+
   end
 end

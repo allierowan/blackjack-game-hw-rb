@@ -25,4 +25,12 @@ class HandTest <Minitest::Test
     assert my_hand.winning_hand?
   end
 
+  def test_bust_hand
+    ace_diamonds = StandardPlayingCards::Card.new("A", "Diamonds")
+    king_spades = StandardPlayingCards::Card.new("K", "Spades")
+    four_hearts = StandardPlayingCards::Card.new(4, "Hearts")
+    my_hand = StandardPlayingCards::Hand.new([ace_diamonds, king_spades, four_hearts])
+    assert my_hand.bust_hand?
+  end
+
 end
