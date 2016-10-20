@@ -2,7 +2,7 @@ module StandardPlayingCards
   class Card
 
     CARD_SCORES = {"A"=> 11, "K"=> 10, "Q"=> 10, "J"=> 10}
-    
+
     attr_reader :face_value, :suit
 
     def initialize(face_value, suit)
