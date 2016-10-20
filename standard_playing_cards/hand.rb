@@ -6,5 +6,9 @@ module StandardPlayingCards
       @cards_in_hand = cards
     end
 
+    def hand_size
+      cards_in_hand.size
+    end
+
   end
 end
