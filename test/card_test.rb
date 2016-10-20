@@ -25,4 +25,9 @@ class CardTest <Minitest::Test
     card1 = StandardPlayingCards::Card.new(10, "Diamonds")
     refute_equal card, card1
   end
+
+  def test_card_score
+    ace_diamonds = StandardPlayingCards::Card.new("A", "Diamonds")
+    assert_equal 11, ace_diamonds.points
+  end
 end

@@ -30,14 +30,6 @@ module StandardPlayingCards
       dealer_hand << game_deck.deal_card!
     end
 
-    def card_points(card)
-      if CARD_SCORES[card.face_value]
-        CARD_SCORES[card.face_value]
-      else
-        card.face_value
-      end
-    end
-
     def hand_score(hand)
       score = 0
       hand.each do |card|
