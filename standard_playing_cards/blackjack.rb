@@ -53,7 +53,16 @@ module StandardPlayingCards
       end
     end
 
-    def dealer_move!
+    def player_turn(instr)
+      if instr == "Hit"
+        hit_player!
+        @player_last_move = "Hit"
+      else
+        @player_last_move = "Stand"
+      end
+    end
+
+    def dealer_turn!
       if dealer_hand.hand_score >= 17
         @dealer_last_move = "Stand"
       else
@@ -61,5 +70,24 @@ module StandardPlayingCards
         hit_dealer!
       end
     end
+
+    def game_over_reason
+      if game_over?
+        if player_hand.bust?
+          "You bust!"
+        elsif dealer_hand.bust?
+          "Dealer bust!"
+        elsif player_hand.won?
+          "You got blackjack!"
+        elsif dealer_hand.won?
+          "Dealer got blackjack!"
+        elsif both_players_stand?
+          "You had #{player_hand.hand_score}. Dealer had #{dealer_hand.hand_score}"
+        else
+          "Unknown"
+        end
+      end
+    end
+
   end
 end
