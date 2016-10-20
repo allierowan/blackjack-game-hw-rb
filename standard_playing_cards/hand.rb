@@ -15,11 +15,11 @@ module StandardPlayingCards
       points_in_hand.reduce(:+)
     end
 
-    def winning_hand?
+    def won?
       hand_score == 21
     end
 
-    def bust_hand?
+    def bust?
       hand_score > 21
     end
 
