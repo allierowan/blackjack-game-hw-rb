@@ -40,5 +40,4 @@ class HandTest <Minitest::Test
     my_hand = StandardPlayingCards::Hand.new([ace_diamonds, king_spades, four_hearts])
     assert my_hand.bust?
   end
-
 end

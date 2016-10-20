@@ -38,7 +38,7 @@ module StandardPlayingCards
     end
 
     def stand_game_winner
-      if player_hand.hand_score >= dealer_hand.hand_score
+      if player_hand.hand_score >= dealer_hand.hand_score && !player_hand.bust?
         "Player"
       else
         "Dealer"
@@ -46,9 +46,9 @@ module StandardPlayingCards
     end
 
     def game_winner
-      if player_hand.bust? || dealer_hand.won? || stand_game_winner == "Dealer"
+      if player_hand.bust? || dealer_hand.won? || (both_players_stand? && stand_game_winner == "Dealer")
         "Dealer"
-      elsif player_hand.won? || dealer_hand.bust? || stand_game_winner == "Player"
+      elsif player_hand.won? || dealer_hand.bust? || (both_players_stand? && stand_game_winner == "Player")
         "Player"
       end
     end

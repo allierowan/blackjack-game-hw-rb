@@ -24,6 +24,14 @@ class BlackjackTest < Minitest::Test
     StandardPlayingCards::Card.new(5, "Diamonds")
   end
 
+  def nine_spades
+    StandardPlayingCards::Card.new(9, "Spades")
+  end
+
+  def six_clubs
+    StandardPlayingCards::Card.new(6, "Clubs")
+  end
+
   def king_spades
     StandardPlayingCards::Card.new("K", "Spades")
   end
@@ -95,6 +103,13 @@ class BlackjackTest < Minitest::Test
     assert new_game.game_over?
   end
 
+  def test_game_over_bust
+    new_game = StandardPlayingCards::Blackjack.new
+    new_game.deal_game!
+    new_game.player_hand = StandardPlayingCards::Hand.new([ace_diamonds, king_spades, three_diamonds])
+    assert new_game.game_over?
+  end
+
   def test_winner_blackjack
     new_game = StandardPlayingCards::Blackjack.new
     new_game.deal_game!
@@ -110,6 +125,32 @@ class BlackjackTest < Minitest::Test
     new_game.dealer_hand = StandardPlayingCards::Hand.new([five_diamonds, king_spades])
     new_game.player_last_move = "Stand"
     new_game.dealer_last_move = "Stand"
+    assert_equal "Dealer", new_game.game_winner
+  end
+
+  def test_winner_stand_mult
+    new_game = StandardPlayingCards::Blackjack.new
+    new_game.deal_game!
+    new_game.player_hand = StandardPlayingCards::Hand.new([three_diamonds, king_hearts, six_clubs])
+    new_game.dealer_hand = StandardPlayingCards::Hand.new([five_diamonds, king_spades])
+    new_game.player_last_move = "Stand"
+    new_game.dealer_last_move = "Stand"
+    assert_equal "Player", new_game.game_winner
+  end
+
+  def test_winner_bust
+    new_game = StandardPlayingCards::Blackjack.new
+    new_game.deal_game!
+    new_game.player_hand = StandardPlayingCards::Hand.new([three_diamonds, king_hearts, six_clubs])
+    new_game.dealer_hand = StandardPlayingCards::Hand.new([five_diamonds, king_spades, ace_diamonds])
+    assert_equal "Player", new_game.game_winner
+  end
+
+  def test_winner_bust_player
+    new_game = StandardPlayingCards::Blackjack.new
+    new_game.deal_game!
+    new_game.player_hand = StandardPlayingCards::Hand.new([three_diamonds, king_hearts, six_clubs, ace_diamonds])
+    new_game.dealer_hand = StandardPlayingCards::Hand.new([five_diamonds, king_spades])
     assert_equal "Dealer", new_game.game_winner
   end
 

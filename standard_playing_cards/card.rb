@@ -23,5 +23,9 @@ module StandardPlayingCards
       face_value == other_card.face_value && suit == other_card.suit
     end
 
+    def show
+      "#{face_value} of #{suit}"
+    end
+
   end
 end
