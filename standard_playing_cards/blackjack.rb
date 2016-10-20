@@ -38,7 +38,7 @@ module StandardPlayingCards
     end
 
     def stand_game_winner
-      if player_hand.points >= dealer_hand.points
+      if player_hand.hand_score >= dealer_hand.hand_score
         "Player"
       else
         "Dealer"

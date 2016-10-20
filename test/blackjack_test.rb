@@ -8,6 +8,26 @@ class BlackjackTest < Minitest::Test
     StandardPlayingCards::Blackjack.new
   end
 
+  def ace_diamonds
+    StandardPlayingCards::Card.new("A", "Diamonds")
+  end
+
+  def king_hearts
+    StandardPlayingCards::Card.new("K", "Hearts")
+  end
+
+  def three_diamonds
+    StandardPlayingCards::Card.new(3, "Diamonds")
+  end
+
+  def five_diamonds
+    StandardPlayingCards::Card.new(5, "Diamonds")
+  end
+
+  def king_spades
+    StandardPlayingCards::Card.new("K", "Spades")
+  end
+
   def test_has_game_deck
     assert blackjack.game_deck.is_a?(StandardPlayingCards::Deck)
   end
@@ -68,12 +88,29 @@ class BlackjackTest < Minitest::Test
     assert new_game.game_over?
   end
 
-  def test_winner
+  def test_game_over_winner
     new_game = StandardPlayingCards::Blackjack.new
     new_game.deal_game!
-    new_game.player_hand = Hand.new([Card.new("A", "Diamonds"), Card.new("K", "Hearts")])
-    new_game.dealer_hand = Hand.new([Card.new("3", "Diamonds"), Card.new("K", "Spades")])
+    new_game.player_hand = StandardPlayingCards::Hand.new([ace_diamonds, king_spades])
+    assert new_game.game_over?
+  end
+
+  def test_winner_blackjack
+    new_game = StandardPlayingCards::Blackjack.new
+    new_game.deal_game!
+    new_game.player_hand = StandardPlayingCards::Hand.new([ace_diamonds, king_hearts])
+    new_game.dealer_hand = StandardPlayingCards::Hand.new([three_diamonds, king_spades])
     assert_equal "Player", new_game.game_winner
+  end
+
+  def test_winner_stand
+    new_game = StandardPlayingCards::Blackjack.new
+    new_game.deal_game!
+    new_game.player_hand = StandardPlayingCards::Hand.new([three_diamonds, king_hearts])
+    new_game.dealer_hand = StandardPlayingCards::Hand.new([five_diamonds, king_spades])
+    new_game.player_last_move = "Stand"
+    new_game.dealer_last_move = "Stand"
+    assert_equal "Dealer", new_game.game_winner
   end
 
 end
