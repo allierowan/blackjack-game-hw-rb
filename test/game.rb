@@ -34,5 +34,5 @@ until !play_again
   puts curr_game.game_over_reason
   puts "Would you like to play again? Y/N"
   input = gets.chomp
-  play_again = false unless input == "Y"
+  play_again = false unless input.downcase == "y"
 end
