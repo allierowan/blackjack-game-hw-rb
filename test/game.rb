@@ -14,7 +14,7 @@ until !play_again
   curr_game.dealer_hand.show_dealer_hand
 
   until curr_game.game_over?
-    if curr_game.player_last_move != "Stand"
+    if curr_game.player_last_move.downcase != "stand"
       puts "Would you like to Hit or Stand? (Hit/Stand)"
       input = gets.chomp
       curr_game.player_turn(input)
